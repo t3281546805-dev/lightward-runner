@@ -597,6 +597,42 @@ body.playing #chaseAtmosphere{opacity:1}
 @keyframes crisp-reveal-copy{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){#wishPanel .wish-results:after,#wishPanel .wish-card-frame:after{animation:none!important;opacity:0}#wishPanel .summary .wish-card,#wishPanel .reveal-enter *{animation:none!important;will-change:auto}}
 
+/* Cinematic pacing and reward presentation. Cloud paintings are new assets, never video frames. */
+#wishPanel .wish-results.summary{background:radial-gradient(ellipse at 45% 48%,#504c4d77,transparent 60%),linear-gradient(#242632,#2d303c);gap:12px}
+#wishPanel .summary .wish-grid-title{font-size:19px;letter-spacing:5px;opacity:.65}
+#wishPanel .summary .wish-grid{max-height:min(69dvh,520px);padding:22px 0}
+#wishPanel .summary .wish-card{animation:final-card-arrive .56s cubic-bezier(.14,.65,.22,1) both;animation-delay:var(--reveal-delay)}
+#wishPanel .wish-card-frame{clip-path:polygon(50% 0,58% 2%,58% 4%,72% 4%,76% 7%,87% 7%,89% 11%,96% 13%,100% 18%,100% 82%,96% 87%,89% 89%,87% 93%,76% 93%,72% 96%,58% 96%,58% 98%,50% 100%,42% 98%,42% 96%,28% 96%,24% 93%,13% 93%,11% 89%,4% 87%,0 82%,0 18%,4% 13%,11% 11%,13% 7%,24% 7%,28% 4%,42% 4%,42% 2%)}
+#wishPanel .wish-card-frame:before{background:radial-gradient(ellipse at 50% 50%,#e4e2ba80,transparent 65%),linear-gradient(#3d5160,#6e7f83 40%,#303d52)}
+#wishPanel .summary .wish-card.gold{filter:drop-shadow(0 0 9px #f8ca75aa)}
+#wishPanel .summary .wish-card.purple{filter:drop-shadow(0 0 8px #bc90ff9c)}
+#wishPanel .summary .wish-card.gold:before{left:-70%;width:240%;top:-22%;bottom:-22%;background:radial-gradient(ellipse,#fff0bc 0%,#ffce7088 14%,#dd8e3222 35%,transparent 62%);filter:blur(7px);animation:final-card-gold 1.8s ease-out var(--reveal-delay) both}
+#wishPanel .summary .wish-card.purple:before{left:-42%;width:184%;top:-14%;bottom:-14%;background:radial-gradient(ellipse,#e9cdff 0%,#bd80ed66 20%,transparent 62%);filter:blur(6px)}
+#wishPanel .role-reveal.gold{background:radial-gradient(ellipse at 57% 40%,#a5986a50,transparent 59%),linear-gradient(120deg,#30313b,#4a464a 48%,#202b3e)}
+#wishPanel .role-reveal-info{z-index:3;text-shadow:0 2px 8px #21273d77}
+#wishPanel .role-reveal-info h3{letter-spacing:3px}
+#wishPanel .role-reveal-info .element-mark{display:inline-flex;width:46px;height:46px;align-items:center;justify-content:center;color:#d8edf3}
+#wishPanel .role-reveal-info .element-mark svg{position:static;width:100%;height:100%;margin:0;filter:none}
+#wishPanel .wish-results.reveal-enter:after{background:#fff;mix-blend-mode:screen;animation:final-reveal-flash .9s both}
+#wishPanel .wish-results.reveal-enter.gold:after{background:#fff6dc}
+#wishPanel .reveal-enter .role-splash{animation:final-role-art 1.45s cubic-bezier(.15,.7,.25,1) both}
+#wishPanel .reveal-enter .role-reveal-info{animation:final-role-copy .46s ease-out .78s both}
+#wishPanel .reveal-enter .wish-stars span{animation:reference-star .23s ease-out calc(.91s + var(--i)*.08s) both}
+#wishPanel .reveal-enter .role-reveal-actions{animation:final-role-copy .3s ease-out 1.2s both}
+@keyframes final-card-arrive{0%{opacity:0;transform:translateX(90px);filter:brightness(2.2)}45%{opacity:1;filter:brightness(1.35)}100%{opacity:1;transform:none}}
+@keyframes final-card-gold{0%{opacity:0;transform:scaleY(.3)}22%{opacity:1;transform:scaleY(1.1)}100%{opacity:.68;transform:none}}
+@keyframes final-reveal-flash{0%,20%{opacity:0}35%{opacity:.95}100%{opacity:0}}
+@keyframes final-role-art{0%{opacity:0;filter:brightness(0);transform:scale(1.08)}18%,35%{opacity:1;filter:brightness(0);transform:scale(1.025)}45%{filter:brightness(1.65)}75%,100%{opacity:1;filter:brightness(1) drop-shadow(0 10px 18px #14213666);transform:none}}
+@keyframes final-role-copy{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+@media(orientation:portrait){
+ #wishPanel .summary .wish-grid{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));max-height:100%;padding:15px 0;gap:15px 5px}
+ #wishPanel .summary .wish-grid-title{font-size:21px}
+ #wishPanel .role-reveal-info .element-mark{width:30px;height:30px}
+ #wishPanel .role-reveal-info h3{font-size:clamp(28px,8vw,39px)}
+}
+@media(orientation:landscape) and (max-height:540px){#wishPanel .summary .wish-grid{max-height:100%;padding:12px 0}#wishPanel .summary .wish-grid-title{font-size:16px}}
+@media(prefers-reduced-motion:reduce){#wishPanel .summary .wish-card,#wishPanel .summary .wish-card:before,#wishPanel .reveal-enter *{animation:none!important}#wishPanel .reveal-enter:after{opacity:0;animation:none!important}}
+
 </style></head><body class="booting"><img id="homeBackdrop" src="./asset-75c69c1dca2e.png" alt="" aria-hidden="true" decoding="sync"><div id="bootScreen" role="status" aria-live="polite"><h2>提瓦特大逃亡</h2><div class="boot-ring"></div><small id="bootStatus">正在准备角色</small></div><svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l14-8Z" fill="currentColor"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><path d="m9 2-1 3-3 1-2 3 2 3-1 3 2 3 4 1 2 3 4-1 2-3 3-1 1-4-2-3V7l-3-2-3 1-2-3Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol><symbol id="i-fish" viewBox="0 0 24 24"><path d="M3 12c4-9 12-9 16-3l4-3v12l-4-3C15 21 7 21 3 12Z" fill="currentColor"/><circle cx="8" cy="10" r="1.4" fill="#fff9df"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><path d="M7 3H3v4m0-4 7 7m-4 3-3 8h18l-3-8M12 14v3m0 2v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol></defs></svg><canvas id="homeGround" aria-hidden="true"></canvas><canvas id="sceneTransition" class="hidden" aria-hidden="true" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas><div id="chaseAtmosphere" aria-hidden="true"></div><div id="chaseNotice" aria-live="off"></div><canvas id="weatherFx" aria-hidden="true"></canvas><canvas id="view" aria-label="三车道骑行游戏：左右滑动换道，上滑跳跃，下滑俯身滑行"></canvas>
 <div id="home"><button id="legalOpen" class="home-legal">版权声明与免责声明</button><div class="home-brand">✧ 提瓦特大逃亡</div><div class="home-stage" id="homeStage" role="img" aria-label="角色互动展示区：左右拖动旋转角色，上下拖动调整观察高度，双指或滚轮缩放，双击复位，轻点互动" tabindex="0"></div><div class="home-showcase"><small>拖动环视 · 双指缩放</small><div id="homeReaction" aria-live="polite"></div></div><div class="home-bottom"></div><div class="home-left"><div class="home-eyebrow"></div><h1>提瓦特<span>大逃亡</span></h1><button id="homeStart" class="home-button start"><svg aria-hidden="true"><use href="#i-play"/></svg>开始游戏</button><button id="characterOpen" class="home-button character-button"><span aria-hidden="true">♙</span><span id="characterName">鹈鹕骑行</span><span aria-hidden="true">›</span></button><button id="wishOpen" class="home-button wish-open">✦ 角色祈愿 <span aria-hidden="true">›</span></button><button id="shopOpen" class="home-button economy-button">商城 <span aria-hidden="true">›</span></button><p class="model-status" id="homeModelStatus" aria-live="polite"></p></div><div class="home-small"><button id="settingsOpen" class="home-button"><svg aria-hidden="true"><use href="#i-gear"/></svg>设置</button><button id="helpOpen" class="home-button"><span aria-hidden="true">?</span>玩法</button></div><div class="home-best"><img class="currency-icon" src="./asset-60e222508b15.png" alt="原石"><b id="walletPrimo">0</b><img class="currency-icon" src="./asset-e3d8c7656176.webp" alt="创世结晶"><b id="walletGenesis">0</b><b id="bestFish" class="hidden">0</b></div></div>
 <div class="game-ui hud"><div class="stat" aria-label="骑行距离"><svg aria-hidden="true"><use href="#i-route"/></svg><b id="distance">0</b><small>m</small></div><div class="stat" aria-label="收集原石"><img class="currency-icon" src="./asset-60e222508b15.png" alt="原石"><b id="fish">0</b></div><div class="stat"><b id="hearts" aria-label="剩余体力">♥ ♥ ♥</b></div></div><div class="game-ui tools"><button class="round" id="pause" aria-label="暂停游戏">Ⅱ</button></div><div class="game-ui track"><i id="progress"></i></div><div id="climateLabel" class="game-ui climate-label">春天 · 早晨 06:00 · 晴天</div><div class="game-ui speed"><b id="speed">0</b><span>KM/H</span></div><div class="game-ui power-tray" id="powerTray" aria-label="已拾取道具"><button id="use-magnet" class="power-button magnet hidden" aria-label="使用磁铁"></button><button id="use-shield" class="power-button shield hidden" aria-label="使用护盾"></button><button id="use-boost" class="power-button boost hidden" aria-label="使用冲刺"></button><button id="use-heal" class="power-button heal hidden" aria-label="使用体力"></button></div><div id="eventState" class="game-ui event-state hidden" role="status"></div><div id="wallFeedback" style="position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0"></div><div id="toast" role="status"></div>
@@ -1254,167 +1290,104 @@ function renderWishBanner(){let id=account.gacha.featured,meta=WISH_BANNER_META[
 
 function wishView(view='banner'){$('wishBannerSelect').classList.toggle('hidden',view!=='banner');for(let [id,name] of [['wishBanner','banner'],['wishRules','rules'],['wishHistory','history']])$(id).classList.toggle('hidden',view!==name);$('wishReturn').classList.toggle('hidden',view==='banner');$('wishMessage').textContent='';if(view==='rules')$('wishRules').innerHTML='<h3>祈愿详情</h3><p>单次 160 原石，十次 1600 原石。五星第 1–73 抽基础概率 0.6%，第 74 抽起每抽增加 6 个百分点，第 90 抽保底。四星第 1–8 抽 5.1%，第 9 抽 56.1%，第 10 抽获得四星或以上。五星不清空四星计数。</p><p>选择一位 UP 角色。非大保底时，先以 50% 概率获得当期 UP；未命中时有 10% 概率触发本作近似的捕获明光，其余获得鹈鹕或秦始皇骑北极熊。若未获得 UP，下一个五星必定为当期 UP。不同角色 UP 共用保底与大保底状态。</p><p>首次获得角色解锁 C0。重复获得时自动提升一层命座，最多 C6；每层增加半颗生命，上限由 3 颗提升至 6 颗。满命后的重复角色转为 160 原石。</p><p>四星为磁铁、护盾、冲刺或恢复道具，等概率各 25%。每局最多携带各 3 件，未使用部分结算返还。三星为 15 原石补给。</p><p class="wish-rule-note">本游戏的命座效果、常驻角色、道具与重复补偿为自定义；递增概率、捕获明光是近似实现，不代表官方未公开的完整算法。游戏充值无需实际付款。</p>';if(view==='history')$('wishHistory').innerHTML='<h3>祈愿记录</h3>'+(account.gacha.history.length?account.gacha.history.map(r=>'<div class="wish-record"><span class="'+(r.stars===5?'gold':r.stars===4?'purple':'')+'">'+r.name+' '+('★'.repeat(r.stars))+'</span><span>第 '+r.number+' 抽'+(r.isNew?' · 新角色':r.constellation?' · C'+r.constellation:r.refund?' · 满命转化':'')+(r.featured?' · UP':'')+'</span></div>').join(''):'<p>暂无记录</p>')}
 
-function openWish(){if(mode==='intro'){introTime=INTRO_DURATION;enterPlay();pause()}else if(mode==='playing')pause();hidePanel('characterPanel');wishView();syncWish();renderWishBanner();let el=$('wishPanel');stopPanelMotion('wishPanel');el.inert=false;el.style.opacity='';el.style.transform='';el.classList.remove('hidden');el.scrollTop=0;el.scrollLeft=0;if($('wishBanner').animate&&!reducedMotion())$('wishBanner').animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:180,easing:'ease-out'})}
+function openWish(){warmWishArt();if(mode==='intro'){introTime=INTRO_DURATION;enterPlay();pause()}else if(mode==='playing')pause();hidePanel('characterPanel');wishView();syncWish();renderWishBanner();let el=$('wishPanel');stopPanelMotion('wishPanel');el.inert=false;el.style.opacity='';el.style.transform='';el.classList.remove('hidden');el.scrollTop=0;el.scrollLeft=0;if($('wishBanner').animate&&!reducedMotion())$('wishBanner').animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:180,easing:'ease-out'})}
 
 function closeWish(){if(wishSequence){showWishSummary();return}hidePanel('wishPanel')}
 function wishArt(r){return r.kind==='role'?'<img src="'+(SPLASHES[r.id]||PORTRAITS[r.id])+'" alt="'+r.name+'">':r.kind==='item'?'<svg viewBox="0 0 32 32" aria-label="'+r.name+'">'+POWER_ICONS[r.id]+'</svg>':'<img src="'+CURRENCY_ART.primo+'" alt="原石">'}
 function wishNote(r){return r.kind==='role'?(r.isNew?'新角色 · C0 已解锁':r.constellation?'命座已提升至 C'+r.constellation+' · 生命上限 '+maxHP(r.id)+' 颗':'已满命 · 转化为 160 原石'):r.kind==='item'?'道具 ×1 · 已存入背包':'原石 ×15 · 已存入账户'}
 
-function beginWish(count){if(wishSequence||![1,10].includes(count))return false;let cost=count*160;if(account.primo<cost){requestWishFunds(count);return false}account.primo-=cost;let batch=Array.from({length:count},()=>rollWish());transaction('wish','旅途群星 · '+count+' 次祈愿',-cost);persistAccount();syncBalances();syncCharacter();renderShop();wishSequence={batch,index:0,phase:'animation'};syncWish();let rarity=Math.max(...batch.map(r=>r.stars));$('wishAnimation').classList.remove('hidden','gold','purple');if(rarity>=4)$('wishAnimation').classList.add(rarity===5?'gold':'purple');$('wishResults').classList.add('hidden');unlockAudio();startWishFlight(rarity,count);if(settings.sfx&&audioContext){let now=audioContext.currentTime;for(let i=0;i<5;i++)audioTone(440*Math.pow(1.25,i),now+i*.16,.6,.11,sfxGain);if(rarity===5)for(let f of [523.25,659.25,783.99,1046.5])audioTone(f,now+4.3,1.1,.16,sfxGain)}if(!wishTimer)wishTimer=setTimeout(finishWishFlight,reducedMotion()?150:WISH_FLIGHT_MS+2500);return true}
-const WISH_FLIGHT_MS=7200;
-let wishFlightFrame=0,wishFlightStart=0,wishFlightLast=0,wishFlightRarity=3,wishFlightCount=1,wishFlightAudio=[];
-let wishCloudRenderer=null;
-let wishCloudSprites=null;
+function beginWish(count){if(wishSequence||![1,10].includes(count))return false;let cost=count*160;if(account.primo<cost){requestWishFunds(count);return false}account.primo-=cost;let batch=Array.from({length:count},()=>rollWish());transaction('wish','旅途群星 · '+count+' 次祈愿',-cost);persistAccount();syncBalances();syncCharacter();renderShop();wishSequence={batch,index:0,phase:'animation'};syncWish();let rarity=Math.max(...batch.map(r=>r.stars));$('wishAnimation').classList.remove('hidden','gold','purple');if(rarity>=4)$('wishAnimation').classList.add(rarity===5?'gold':'purple');$('wishResults').classList.add('hidden');unlockAudio();startWishFlight(rarity,count);if(settings.sfx&&audioContext){let now=audioContext.currentTime;for(let i=0;i<5;i++)audioTone(440*Math.pow(1.25,i),now+i*.16,.6,.11,sfxGain);if(rarity===5)for(let f of [523.25,659.25,783.99,1046.5])audioTone(f,now+3.74,1.1,.16,sfxGain)}if(!wishTimer)wishTimer=setTimeout(finishWishFlight,reducedMotion()?150:WISH_FLIGHT_MS+2500);return true}
+const WISH_FLIGHT_MS=6800;
+const WISH_PAINTS={"portal": "./asset-617c2fe5a35c.png", "sky": "./asset-d2adb346cbe2.png"};
+let wishPaints={},wishFlightFrame=0,wishFlightStart=0,wishFlightAudio=[],wishFlightRarity=3,wishFlightCount=1;
 const wishClamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const wishSmooth=v=>{v=wishClamp(v);return v*v*(3-2*v)};
-function finishWishFlight(){if(!wishSequence||wishSequence.phase!=='animation')return;if(wishSequence.batch.length>1)showWishSummary();else revealWish()}
+function warmWishArt(){if(typeof Image==='undefined')return;for(let key of Object.keys(WISH_PAINTS)){if(wishPaints[key])continue;let img=new Image();img.decoding='async';img.src=WISH_PAINTS[key];wishPaints[key]=img}}
 function stopWishFlight(){if(wishFlightFrame)cancelAnimationFrame(wishFlightFrame);wishFlightFrame=0;for(let node of wishFlightAudio){try{node.stop()}catch(e){}}wishFlightAudio=[]}
-
-// Clouds are synthesized from fractal density in a shader. There are no image or video textures.
-const WISH_CLOUD_FRAGMENT=`
-precision highp float;
-uniform vec2 uResolution;
-uniform float uTime;
-float hash(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
-float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
-float fbm(vec2 p){float f=0.,a=.52;mat2 m=mat2(1.61,1.21,-1.21,1.61);for(int i=0;i<5;i++){f+=a*noise(p);p=m*p+vec2(7.1,3.8);a*=.5;}return f;}
-float field(vec2 p,float t){return fbm(p+vec2(noise(p*.7+vec2(t*.035,0.)),noise(p*.8+vec2(4.1,-t*.025)))*1.9);}
-void main(){
- vec2 uv=vec2(gl_FragCoord.x/uResolution.x,1.-gl_FragCoord.y/uResolution.y);
- float aspect=uResolution.x/uResolution.y,portrait=1.-step(1.,aspect),t=uTime;
- vec2 center=vec2(.52,mix(.43,.34,portrait));
- vec2 p=(uv-center)*vec2(aspect,1.);
- float fly=smoothstep(1.65,2.25,t),zoom=1.+smoothstep(0.,2.2,t)*.45;
- vec2 q=p/zoom;
- float r=length(q),a=atan(q.y,q.x);
- float twist=.26/(r+.22)+t*.14;
- vec2 vortex=vec2(cos(a+twist),sin(a+twist))*r;
- float n=field(vortex*5.8,t),ridge=field(vortex*5.8+vec2(-.09,-.13),t);
- float gateDensity=smoothstep(.12,.29,r+(n-.5)*.17);
- gateDensity*=smoothstep(.25,.65,n+smoothstep(.30,.7,r)*.55);
- vec3 deep=mix(vec3(.035,.10,.28),vec3(.10,.28,.53),smoothstep(.0,1.,uv.y));
- float iris=exp(-r*7.5);
- vec3 portal=deep+vec3(.10,.35,.58)*iris;
- float lighting=clamp(.58+(n-ridge)*4.5+smoothstep(.25,.6,n)*.34,0.,1.);
- vec3 cloud=mix(vec3(.20,.45,.70),vec3(.94,.99,1.),lighting);
- cloud+=vec3(.12,.21,.24)*pow(max(0.,1.-r*1.5),3.);
- vec3 gate=mix(portal,cloud,gateDensity);
- float rim=exp(-pow((r-.205+(n-.5)*.12)*20.,2.));
- gate+=vec3(.15,.39,.5)*rim*.65;
- // During flight the lower clouds form a receding horizon instead of a flat backdrop.
- vec2 travel=vec2(uv.x*aspect,uv.y)*4.1+vec2(-t*.13,t*.045);
- float f=field(travel,t),f2=field(travel+vec2(-.10,-.16),t);
- float coverage=smoothstep(.49,.79,uv.y+(f-.5)*.36);
- float sideCloud=smoothstep(.52,.85,abs(uv.x-.5)*1.7)*smoothstep(.25,.8,uv.y);
- coverage=max(coverage,sideCloud*smoothstep(.30,.68,f));
- vec3 blue=mix(vec3(.045,.085,.26),vec3(.24,.51,.86),pow(uv.y,.8));
- float sun=exp(-length((uv-vec2(.65,.10))*vec2(aspect,1.))*3.);
- blue+=vec3(.04,.10,.20)*sun;
- float light=clamp(.65+(f-f2)*4.4+f*.33,0.,1.);
- vec3 horizon=mix(vec3(.25,.48,.74),vec3(.92,.97,1.),light);
- vec3 flight=mix(blue,horizon,coverage);
- vec3 color=mix(gate,flight,fly);
- float vignette=1.-.18*pow(length((uv-.5)*vec2(.85,1.)),1.8);
- gl_FragColor=vec4(color*vignette,1.);
-}`;
-function makeWishCloudRenderer(){
- try{
-  let canvas=document.createElement('canvas'),gl=canvas.getContext('webgl',{alpha:false,antialias:false,depth:false,preserveDrawingBuffer:true,powerPreference:'low-power'});
-  if(!gl)return null;
-  const shader=(kind,source)=>{let sh=gl.createShader(kind);gl.shaderSource(sh,source);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(sh));return sh};
-  let program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,'attribute vec2 position;void main(){gl_Position=vec4(position,0.,1.);}'));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,WISH_CLOUD_FRAGMENT));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));
-  gl.useProgram(program);let buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);let location=gl.getAttribLocation(program,'position');gl.enableVertexAttribArray(location);gl.vertexAttribPointer(location,2,gl.FLOAT,false,0,0);
-  let resolution=gl.getUniformLocation(program,'uResolution'),time=gl.getUniformLocation(program,'uTime');
-  return{canvas,gl,last:-1,draw(w,h,t){let scale=Math.min(1.5,1280/Math.max(w,h)),cw=Math.max(2,Math.round(w*scale)),ch=Math.max(2,Math.round(h*scale));if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch;gl.viewport(0,0,cw,ch)}if(this.last>=0&&Math.abs(t-this.last)<1/24)return;this.last=t;gl.useProgram(program);gl.uniform2f(resolution,cw,ch);gl.uniform1f(time,t);gl.drawArrays(gl.TRIANGLES,0,6)}};
- }catch(error){console.warn('祈愿云海使用兼容绘制',error.message);return null}
-}
-function makeWishCloudSprites(){
- try{
-  let canvas=document.createElement('canvas'),size=512;canvas.width=canvas.height=size;let context=canvas.getContext('2d');if(!context?.createImageData)return null;
-  let pixels=context.createImageData(size,size),grid=new Float32Array(16384);
-  for(let i=0;i<grid.length;i++){let k=Math.imul(i^0x45d9f3b,0x45d9f3b);k=Math.imul(k^(k>>>16),0x45d9f3b);grid[i]=((k^(k>>>16))>>>0)/4294967295}
-  const noise=(x,y)=>{let ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy;fx=fx*fx*(3-2*fx);fy=fy*fy*(3-2*fy);let a=grid[(iy&127)*128+(ix&127)],b=grid[(iy&127)*128+((ix+1)&127)],c=grid[((iy+1)&127)*128+(ix&127)],d=grid[((iy+1)&127)*128+((ix+1)&127)];return (a+(b-a)*fx)*(1-fy)+(c+(d-c)*fx)*fy};
-  const field=(x,y)=>{let n=0,amp=.52;for(let k=0;k<5;k++){n+=amp*noise(x,y);let xx=x*1.61+y*1.21;x=xx+7.1;y=y*1.61-x*.38+3.8;amp*=.5}return n};
-  for(let y=0;y<size;y++)for(let x=0;x<size;x++){let px=(x-size*.5)/(size*.5),py=(y-size*.5)/(size*.5),r=Math.hypot(px,py),n=field(px*2.8+9,py*2.8+6),shade=field(px*2.8+8.92,py*2.8+5.90),density=wishSmooth((1.04-r+(n-.5)*.37)/.17)*wishSmooth((.99-r)/.14),lighting=wishClamp(.42+(n-shade)*2.7+n*.50),i=(y*size+x)*4;pixels.data[i]=84+165*lighting;pixels.data[i+1]=141+111*lighting;pixels.data[i+2]=195+60*lighting;pixels.data[i+3]=Math.round(density*255)}
-  context.putImageData(pixels,0,0);return canvas;
- }catch(error){return null}
-}
-function wishFallbackClouds(ctx,w,h,t){
- let sky=ctx.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#10234e');sky.addColorStop(1,'#659cde');ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
- let opening=1-wishSmooth((t-1.6)/.6),unit=Math.min(w,h);
- if(wishCloudSprites){
-  let cx=w*.52,cy=h*(h>w?.34:.43);
-  if(opening>0)for(let layer=0;layer<3;layer++)for(let i=0;i<18;i++){let a=i*Math.PI*2/18+t*.075+layer*.19,r=unit*(.47+layer*.22)*(1+wishSmooth(t/2)*.25),x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r,size=unit*(.50+layer*.18+(i%3)*.045);ctx.save();ctx.globalAlpha=opening;ctx.translate(x,y);ctx.rotate(a*.17);ctx.drawImage(wishCloudSprites,-size*.5,-size*.5,size,size);ctx.restore()}
-  let flight=1-opening;if(flight>0)for(let layer=0;layer<2;layer++)for(let i=0;i<12;i++){let size=unit*(.36+layer*.15+(i%3)*.08),x=(i/11*w*1.3-w*.15)-t*7*(layer+1),y=h*(.91+layer*.09)+Math.sin(i*1.7+t*.13)*unit*.07;ctx.save();ctx.globalAlpha=flight;ctx.translate(x,y);ctx.rotate(i*.13);ctx.drawImage(wishCloudSprites,-size*.5,-size*.5,size,size);ctx.restore()}
-  return;
+function finishWishFlight(){if(!wishSequence||wishSequence.phase!=='animation')return;let five=wishSequence.batch.findIndex(r=>r.stars===5);if(five>=0){wishSequence.index=five;revealWish()}else if(wishSequence.batch.length>1)showWishSummary();else revealWish()}
+function wishDrawPlate(ctx,image,w,h,{zoom=1,angle=0,dx=0,dy=0,bottom=false}={}){if(!image?.complete||!image.naturalWidth)return false;let scale=Math.max(w/image.naturalWidth,h/image.naturalHeight)*zoom,iw=image.naturalWidth*scale,ih=image.naturalHeight*scale;ctx.save();ctx.translate(w*.5+dx,h*.5+dy);ctx.rotate(angle);ctx.drawImage(image,-iw*.5,bottom?h*.5-ih:-ih*.5,iw,ih);ctx.restore();return true}
+function wishPortalLayer(ctx,w,h,t){
+ let portrait=h>w,unit=Math.min(w,h),cx=w*.5,cy=h*(portrait?.37:.45),dive=wishSmooth((t-.8)/1.05),size=(portrait?w*1.68:h*1.68)*(1+dive*1.65),image=wishPaints.portal;
+ let sky=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(w,h));sky.addColorStop(0,'#174f96');sky.addColorStop(.45,'#8bd4f0');sky.addColorStop(1,'#e7faff');ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+ if(image?.complete&&image.naturalWidth){
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(-.075+t*.045);let far=Math.max(w,h)*1.65*(1+dive*.25);ctx.drawImage(image,-far*.5,-far*.46,far,far);ctx.restore();
+  // A soft circular mask joins a nearer rotating cloud layer to the distant cloud vault.
+  let ring=Math.max(size,unit*1.4);
+  // Reuse the mask backing store; only transform the cloud plate between frames.
+  if(!wishPaints.mask){let mask=document.createElement('canvas');mask.width=mask.height=1024;let m=mask.getContext('2d');m.drawImage(image,0,0,1024,1024);m.globalCompositeOperation='destination-in';let fade=m.createRadialGradient(512,512,340,512,512,512);fade.addColorStop(0,'#fff');fade.addColorStop(1,'#fff0');m.fillStyle=fade;m.fillRect(0,0,1024,1024);wishPaints.mask=mask}
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(.035+t*.085);ctx.drawImage(wishPaints.mask,-ring*.5,-ring*.46,ring,ring);ctx.restore();
  }
- for(let i=0;i<56;i++){let a=i*2.399+t*.12,r=unit*(.28+(i%7)*.075),cx=w*.52+Math.cos(a)*r,cy=h*(opening>.5?.36:.97)+Math.sin(a)*r*(opening>.5?1:.3),size=unit*(.16+(i%5)*.025),g=ctx.createRadialGradient(cx-size*.15,cy-size*.22,0,cx,cy,size);g.addColorStop(0,'#f3fcff');g.addColorStop(.5,'#bfe5f7dd');g.addColorStop(1,'#80b9df00');ctx.fillStyle=g;ctx.fillRect(cx-size,cy-size,size*2,size*2)}
+ return{cx,cy,dive};
 }
-function wishStar(ctx,x,y,size,color,alpha=1){
- ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=alpha;ctx.translate(x,y);
- let glow=ctx.createRadialGradient(0,0,0,0,0,size*12);glow.addColorStop(0,'#ffffff');glow.addColorStop(.07,'#ffffff');glow.addColorStop(.18,color+'cc');glow.addColorStop(.43,color+'44');glow.addColorStop(1,color+'00');ctx.fillStyle=glow;ctx.fillRect(-size*12,-size*12,size*24,size*24);
- ctx.fillStyle='#fff';ctx.beginPath();ctx.moveTo(0,-size*3.8);ctx.quadraticCurveTo(size*.2,-size*.35,size*5.5,0);ctx.quadraticCurveTo(size*.2,size*.35,0,size*3.8);ctx.quadraticCurveTo(-size*.2,size*.35,-size*5.5,0);ctx.quadraticCurveTo(-size*.2,-size*.35,0,-size*3.8);ctx.fill();ctx.restore();
+function wishCore(ctx,x,y,r,color,alpha=1){
+ ctx.save();ctx.globalCompositeOperation='source-over';ctx.globalAlpha=alpha;ctx.translate(x,y);
+ let glow=ctx.createRadialGradient(0,0,0,0,0,r*13);glow.addColorStop(0,'#fff');glow.addColorStop(.08,'#fff');glow.addColorStop(.19,color+'dd');glow.addColorStop(.48,color+'38');glow.addColorStop(1,color+'00');ctx.fillStyle=glow;ctx.fillRect(-r*13,-r*13,r*26,r*26);
+ ctx.globalCompositeOperation='lighter';let flare=ctx.createLinearGradient(-r*20,0,r*20,0);flare.addColorStop(0,color+'00');flare.addColorStop(.43,color+'44');flare.addColorStop(.50,'#fff');flare.addColorStop(.57,color+'44');flare.addColorStop(1,color+'00');ctx.fillStyle=flare;ctx.beginPath();ctx.moveTo(-r*20,0);ctx.lineTo(0,-r*.20);ctx.lineTo(r*20,0);ctx.lineTo(0,r*.20);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#fff';ctx.beginPath();ctx.moveTo(0,-r*3.1);ctx.quadraticCurveTo(r*.14,-r*.25,r*3.5,0);ctx.quadraticCurveTo(r*.14,r*.25,0,r*3.1);ctx.quadraticCurveTo(-r*.14,r*.25,-r*3.5,0);ctx.quadraticCurveTo(-r*.14,-r*.25,0,-r*3.1);ctx.fill();ctx.restore();
 }
-function wishMeteor(ctx,x,y,length,width,color,alpha=1,angle=2.55){
- ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=alpha;ctx.translate(x,y);ctx.rotate(angle);
- for(let layer=3;layer>=0;layer--){let spread=width*(1+layer*2.1),tail=ctx.createLinearGradient(-length,0,8,0);tail.addColorStop(0,color+'00');tail.addColorStop(.35,color+(layer?'08':'22'));tail.addColorStop(.83,color+(layer?'35':'cc'));tail.addColorStop(1,'#ffffff');ctx.fillStyle=tail;ctx.beginPath();ctx.moveTo(-length,-spread);ctx.bezierCurveTo(-length*.65,-spread*.5,-length*.10,-width*.2,5,0);ctx.bezierCurveTo(-length*.10,width*.2,-length*.65,spread*.5,-length,spread);ctx.closePath();ctx.fill()}
- ctx.strokeStyle='#ecfbff';ctx.lineWidth=Math.max(.7,width*.17);ctx.beginPath();ctx.moveTo(-length*.88,0);ctx.quadraticCurveTo(-length*.3,-width*.15,5,0);ctx.stroke();ctx.restore();wishStar(ctx,x,y,width*.65,color,alpha);
+function wishRibbon(ctx,x,y,len,r,color,alpha=1,angle=.42,seed=0){
+ ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.globalCompositeOperation='lighter';ctx.globalAlpha=alpha;
+ // A broad translucent blue wake, bright inner jet and several separated crystal ribbons.
+ for(let i=3;i>=0;i--){let spread=r*(3.8+i*2.5),g=ctx.createLinearGradient(-len,0,r,0);g.addColorStop(0,color+'00');g.addColorStop(.18,color+'18');g.addColorStop(.66,color+(i?'3b':'99'));g.addColorStop(.95,color+(i?'66':'ee'));g.addColorStop(1,i?color+'44':'#fff');ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(-len,-spread);ctx.bezierCurveTo(-len*.7,-spread*.5,-len*.18,-r*.5,5,0);ctx.bezierCurveTo(-len*.15,r*.5,-len*.65,spread*.22,-len,spread*.6);ctx.closePath();ctx.fill()}
+ for(let i=0;i<6;i++){let offset=Math.sin(i*2.7+seed)*r*6,back=len*(.35+(i%3)*.18),g=ctx.createLinearGradient(-len,offset,0,0);g.addColorStop(0,'#70b9ff00');g.addColorStop(.8,color+'66');g.addColorStop(1,'#eafbff');ctx.strokeStyle=g;ctx.lineWidth=Math.max(.8,r*(i%2?.12:.25));ctx.beginPath();ctx.moveTo(-len,offset*2);ctx.quadraticCurveTo(-back,offset,0,0);ctx.stroke()}
+ let core=ctx.createLinearGradient(-len*.8,0,0,0);core.addColorStop(0,'#dff8ff00');core.addColorStop(.8,'#e9faffcc');core.addColorStop(1,'#fff');ctx.strokeStyle=core;ctx.lineWidth=Math.max(1,r*.42);ctx.beginPath();ctx.moveTo(-len*.8,0);ctx.quadraticCurveTo(-len*.2,-r*.3,0,0);ctx.stroke();ctx.restore();
+ wishCore(ctx,x,y,r*.72,color,alpha);
 }
-function wishRainbow(ctx,x,y,r,alpha){
- ctx.save();ctx.translate(x,y);ctx.rotate(-.4);ctx.scale(1,.65);ctx.globalCompositeOperation='lighter';ctx.globalAlpha=alpha;
- const colors=['#f9685288','#ffbd7188','#f9e78d88','#84ebc988','#84c8ff88','#bb94ff88'];for(let i=0;i<colors.length;i++){ctx.strokeStyle=colors[i];ctx.lineWidth=Math.max(1,r*.018);ctx.beginPath();ctx.arc(0,0,r+i*r*.025,-.1,Math.PI*2.04);ctx.stroke()}ctx.restore();
+function wishPrism(ctx,x,y,unit,progress,alpha){
+ ctx.save();ctx.translate(x,y);ctx.rotate(-.30);ctx.scale(1,.86);ctx.globalCompositeOperation='source-over';
+ const colors=['#ff786d','#ffc17b','#fff2aa','#8af0d7','#80bfff','#b6a1ff'];
+ for(let side=0;side<2;side++)for(let i=0;i<6;i++)for(let step=0;step<24;step++){ctx.globalAlpha=alpha*Math.sin(Math.PI*(step+.5)/24)*.55;ctx.strokeStyle=colors[i];ctx.lineWidth=unit*.0028;let radius=unit*(.105+progress*.12+i*.0037),a=side*Math.PI+.30+step*1.80/24;ctx.beginPath();ctx.arc(0,0,radius,a,a+1.81/24);ctx.stroke()}
+ ctx.restore();
+}
+function wishCrystals(ctx,x,y,len,r,angle,t,color,amount=32){
+ ctx.save();ctx.globalCompositeOperation='lighter';for(let i=0;i<amount;i++){let f=(i*.173+t*.7)%1,offset=Math.sin(i*6.27)*r*(2+f*5),back=f*len*.75,xx=x-Math.cos(angle)*back+Math.cos(angle+Math.PI/2)*offset,yy=y-Math.sin(angle)*back+Math.sin(angle+Math.PI/2)*offset;ctx.save();ctx.translate(xx,yy);ctx.rotate(angle+i);ctx.globalAlpha=(1-f)*.75;ctx.fillStyle=i%4?'#bdedff':color;let s=r*(.13+(i%4)*.07);ctx.beginPath();ctx.moveTo(-s*2,0);ctx.lineTo(0,-s*.6);ctx.lineTo(s,0);ctx.lineTo(0,s*.5);ctx.closePath();ctx.fill();ctx.restore()}ctx.restore();
 }
 function drawWishFlightFrame(ctx,w,h,t,rarity,count){
- const unit=Math.min(w,h),portrait=h>w,flight=wishSmooth((t-1.65)/.65),u=wishClamp((t-2.0)/2.6),colorT=wishSmooth((t-3.35)/.65),burst=wishSmooth((t-4.2)/.40),shower=wishSmooth((t-4.75)/.5),approach=wishSmooth((t-6.15)/.70);
- const target=rarity===5?[255,191,75]:rarity===4?[191,125,255]:[119,207,255],base=[109,203,255],color='#'+target.map((v,i)=>Math.round(base[i]+(v-base[i])*colorT).toString(16).padStart(2,'0')).join('');
+ const portrait=h>w,unit=Math.min(w,h),scale=unit/720;
  ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
- if(wishCloudRenderer&&!wishCloudRenderer.gl.isContextLost()){wishCloudRenderer.draw(w,h,t);ctx.drawImage(wishCloudRenderer.canvas,0,0,w,h)}else wishFallbackClouds(ctx,w,h,t);
- // Distant pinpoints and small crystals in the portal continue moving as the camera enters.
- for(let i=0;i<42;i++){let x=((Math.sin(i*71.39)*.5+.5)*w+t*(i%2?1:-1)*1.4)%w,y=(Math.cos(i*13.17)*.5+.5)*h;wishStar(ctx,x,y,unit*(i%4===0?.0018:.00085),'#bdeaff',(.16+.15*Math.sin(i+t*2))*(.3+flight*.7))}
- let gateX=w*.52,gateY=h*(portrait?.34:.43);
- if(flight<1){wishStar(ctx,gateX,gateY,unit*(.004+t*.003),'#a7e8ff',1-flight);for(let i=0;i<18;i++){let a=i*2.399+t*.8,r=unit*(.08+(i%5)*.022)*(1-wishSmooth(t/2)*.55);wishStar(ctx,gateX+Math.cos(a)*r,gateY+Math.sin(a)*r,unit*.0015,'#d1f0ff',(1-flight)*.6)}}
- if(flight>0){
-  let x=w*(portrait?.50:.48)+Math.sin(u*1.8)*w*(portrait?.035:.045),y=h*(.34+.22*u),angle=portrait?2.03:2.59;
-  if(shower>0){x+=(w*.50-x)*shower;y+=(h*.54-y)*shower;angle+=(portrait?.0:-.30)*shower}
-  let width=unit*(.009+.004*u+.025*approach),length=Math.max(w,h)*(.63+.3*approach);
-  // Blue companion meteors spread out in depth, all paths remain relative to the current viewport.
-  for(let i=0;i<(count===10?9:3);i++){let cycle=wishClamp((t-4.3-i*.08)/1.7),a=angle+(i%3-1)*.13,offset=(i-4)*unit*.095;let px=x+Math.cos(a+Math.PI/2)*offset+unit*(cycle-.5)*.28,py=y+Math.sin(a+Math.PI/2)*offset-unit*.2*(1-cycle);wishMeteor(ctx,px,py,unit*(.30+.30*cycle),unit*(.0025+(i%3)*.0012),'#78caff',flight*(.10+.7*shower)*(1-approach*.7),a)}
-  wishMeteor(ctx,x,y,length,width,color,flight,angle);
-  // Thin high resolution shards, rather than a baked low resolution particle clip.
-  for(let i=0;i<84;i++){let cycle=(t*.65+i*.137)%1,lag=cycle*unit*.64,spread=Math.sin(i*8.27)*unit*(.018+.035*cycle),px=x-Math.cos(angle)*lag+Math.cos(angle+Math.PI/2)*spread,py=y-Math.sin(angle)*lag+Math.sin(angle+Math.PI/2)*spread;
-   ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=(1-cycle)*flight*.72;ctx.translate(px,py);ctx.rotate(i*.7+t*.4);ctx.fillStyle=i%4?'#ceefff':color;let r=unit*(.0015+(i%4)*.00065);ctx.beginPath();ctx.moveTo(0,-r*2.5);ctx.lineTo(r*.65,0);ctx.lineTo(0,r*1.4);ctx.lineTo(-r*.65,0);ctx.closePath();ctx.fill();ctx.restore();
-  }
-  if(rarity===5&&colorT>0){wishRainbow(ctx,x,y,unit*(.055+colorT*.07+burst*.04),colorT*(.7-approach*.5));wishRainbow(ctx,x,y,unit*(.20+burst*.04),colorT*.18);}
-  // A brief radial gold/purple starburst at the rarity reveal, with an expanding lens ring.
-  let pulse=Math.exp(-Math.pow((t-4.3)*5,2));if(rarity>=4&&pulse>.01){ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=pulse*.65;let g=ctx.createRadialGradient(x,y,0,x,y,unit*.55);g.addColorStop(0,'#fff');g.addColorStop(.12,color);g.addColorStop(.55,color+'33');g.addColorStop(1,color+'00');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);for(let i=0;i<18;i++){let a=i*2.399;ctx.strokeStyle=color;ctx.lineWidth=unit*.0015;ctx.beginPath();ctx.moveTo(x+Math.cos(a)*unit*.055,y+Math.sin(a)*unit*.055);ctx.lineTo(x+Math.cos(a)*unit*(.13+(i%4)*.08),y+Math.sin(a)*unit*(.13+(i%4)*.08));ctx.stroke()}ctx.restore()}
+ let sky=ctx.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#11183f');sky.addColorStop(1,'#2d77c9');ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+ let open=1-wishSmooth((t-1.70)/.38);
+ if(open<1){ctx.save();ctx.globalAlpha=1-open;wishDrawPlate(ctx,wishPaints.sky,w,h,{zoom:1.13,angle:-.035+Math.sin(t*.46)*.018,dx:-w*.028*(t-2),dy:h*.025*Math.sin(t*.7),bottom:true});let shade=ctx.createLinearGradient(0,0,0,h);shade.addColorStop(0,'#080d2a77');shade.addColorStop(.62,'#080d2a44');shade.addColorStop(1,'#080d2a00');ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);ctx.restore()}
+ if(open>0){ctx.save();ctx.globalAlpha=open;let portal=wishPortalLayer(ctx,w,h,t);let size=unit*(.0027+wishSmooth(t/1.6)*.006);wishCore(ctx,portal.cx,portal.cy,size,'#93e7ff',wishSmooth(t/.28));
+  for(let i=0;i<10;i++){let a=i*2.399+t*.3,r=unit*(.045+(i%3)*.025),s=unit*.0008;wishCore(ctx,portal.cx+Math.cos(a)*r,portal.cy+Math.sin(a)*r,s,'#d0f4ff',.4*(1-wishSmooth((t-1.1)/.5)))}ctx.restore()}
+ const change=wishSmooth((t-3.15)/.55),target=rarity===5?[255,190,70]:rarity===4?[190,126,255]:[111,208,255],base=[101,201,255],color='#'+target.map((v,i)=>Math.round(base[i]+(v-base[i])*change).toString(16).padStart(2,'0')).join('');
+ // Shot 1: the camera tracks the meteor diagonally, while the cloud horizon banks beneath it.
+ if(t>=1.78&&t<4.32){let u=wishSmooth((t-1.78)/.48),flight=wishClamp((t-2.12)/1.75),x=w*((portrait?.46:.43)+flight*(portrait?.10:.035)),y=h*(.29+flight*.21),angle=portrait?.81:.43,r=unit*(.008+flight*.004),len=Math.max(w,h)*(.60+flight*.14);
+  ctx.save();ctx.globalAlpha=u;wishRibbon(ctx,x,y,len,r,color,1,angle,t);wishCrystals(ctx,x,y,len,r,angle,t,color,40);
+  if(rarity===5&&change>.1){wishPrism(ctx,x,y,unit,change,change*.78);let a=Math.exp(-Math.pow((t-3.74)*6,2));if(a>.01){let g=ctx.createRadialGradient(x,y,0,x,y,unit*.34);g.addColorStop(0,'#fff8dd');g.addColorStop(.22,'#ffce6a66');g.addColorStop(1,'#ffc44800');ctx.globalCompositeOperation='source-over';ctx.globalAlpha=a*.24;ctx.fillStyle=g;ctx.fillRect(0,0,w,h)}}ctx.restore();
  }
- let flash=wishSmooth((t-6.78)/.40),opening=1-wishSmooth(t/.20);if(flash>0||opening>0){ctx.globalCompositeOperation='source-over';ctx.fillStyle='rgba(248,252,255,'+Math.max(flash,opening)+')';ctx.fillRect(0,0,w,h)}
+ // Shot 2: hard camera cut into the coloured star and its blue companions rushing past the lens.
+ if(t>=4.16&&t<5.20){let v=wishClamp((t-4.16)/1.04),angle=portrait?2.16:2.72;
+  for(let i=(count===10?10:4);i>=0;i--){let depth=.45+(i%4)*.2,delay=i*.028,k=wishClamp((v-delay)/(1-delay)),x=w*(1.10-k*1.35)+(i%3-1)*w*.13,y=h*(-.12+k*1.23)+(i-4)*h*.055,main=i===0,r=unit*(main?.017:.0045)*depth,col=main?color:'#6ecbff';wishRibbon(ctx,x,y,Math.max(w,h)*(.7+depth*.3),r,col,wishSmooth(k*8)*(1-wishSmooth((k-.85)/.15)),angle,i);if(main)wishCrystals(ctx,x,y,unit*.7,r,angle,t,color,25)}
+ }
+ // Shot 3: blue stars descend first; the rare meteor follows close to camera and fills the frame.
+ if(t>=5.04){let v=wishClamp((t-5.04)/1.42),angle=portrait?2.08:2.36;
+  for(let i=0;i<(count===10?9:3);i++){let k=wishClamp((v+i*.055)*1.20),x=w*(.18+(i%4)*.22)-w*.16*k,y=h*(-.45+(i%3)*.17+k*1.8);wishRibbon(ctx,x,y,Math.max(w,h)*.48,unit*(.0035+(i%3)*.0012),'#76d9ff',1-wishSmooth((k-.8)/.2),angle,i)}
+  let close=wishSmooth((t-5.65)/.78),x=w*(portrait?.77:.91)-w*(portrait?.30:.42)*v,y=h*(-.38+v*1.02),r=unit*(.011+close*.055);wishRibbon(ctx,x,y,Math.max(w,h)*(1+close),r,color,wishSmooth((t-5.28)/.22),angle,t);wishCrystals(ctx,x,y,unit*.65,r*.7,angle,t,color,28);
+ }
+ let entrance=1-wishSmooth(t/.17),cutFlash=Math.exp(-Math.pow((t-4.18)*14,2))*(rarity===5?.86:.58),end=wishSmooth((t-6.43)/.25);
+ if(Math.max(entrance,cutFlash,end)>.001){ctx.globalCompositeOperation='source-over';ctx.globalAlpha=1;ctx.fillStyle='rgba(248,252,255,'+Math.max(entrance,cutFlash,end)+')';ctx.fillRect(0,0,w,h)}
 }
 function startWishFlight(rarity,count){
- stopWishFlight();wishFlightRarity=rarity;wishFlightCount=count;wishFlightStart=performance.now();wishFlightLast=-Infinity;
+ stopWishFlight();warmWishArt();wishFlightRarity=rarity;wishFlightCount=count;
  if(reducedMotion()){wishTimer=setTimeout(finishWishFlight,150);return}
- let canvas=$('wishSky'),ctx=canvas?.getContext?.('2d',{alpha:false});if(!ctx){wishTimer=setTimeout(finishWishFlight,150);return}
- if(!wishCloudRenderer)wishCloudRenderer=makeWishCloudRenderer();if(wishCloudRenderer)wishCloudRenderer.last=-1;else if(!wishCloudSprites)wishCloudSprites=makeWishCloudSprites();
- let draw=now=>{
-  if(!wishSequence||wishSequence.phase!=='animation'){stopWishFlight();return}
-  wishFlightFrame=requestAnimationFrame(draw);if(now-wishFlightLast<15)return;wishFlightLast=now;
-  let w=canvas.clientWidth||960,h=canvas.clientHeight||540,dpr=Math.min(typeof devicePixelRatio==='number'?devicePixelRatio:1,2.5,2880/Math.max(w,h)),cw=Math.round(w*dpr),ch=Math.round(h*dpr);
-  if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch}ctx.setTransform(dpr,0,0,dpr,0,0);
-  drawWishFlightFrame(ctx,w,h,Math.min(WISH_FLIGHT_MS/1000,(now-wishFlightStart)/1000),rarity,count);
- };draw(wishFlightStart);wishTimer=setTimeout(finishWishFlight,WISH_FLIGHT_MS);
- if(settings.sfx&&audioContext&&typeof audioContext.createBuffer==='function'){let now=audioContext.currentTime;try{let buffer=audioContext.createBuffer(1,audioContext.sampleRate*3,audioContext.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*.2;let source=audioContext.createBufferSource(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();source.buffer=buffer;filter.type='bandpass';filter.frequency.setValueAtTime(330,now+1.3);filter.frequency.exponentialRampToValueAtTime(2800,now+3.8);gain.gain.setValueAtTime(.001,now);gain.gain.linearRampToValueAtTime(.19,now+2.5);gain.gain.exponentialRampToValueAtTime(.006,now+4.4);source.connect(filter);filter.connect(gain);gain.connect(sfxGain);source.start(now+1.5);source.stop(now+4.5);wishFlightAudio.push(source)}catch(e){}}
+ let canvas=$('wishSky'),ctx=canvas?.getContext?.('2d',{alpha:false});if(!ctx){wishTimer=setTimeout(finishWishFlight,150);return}wishFlightStart=performance.now();
+ const draw=now=>{if(!wishSequence||wishSequence.phase!=='animation'){stopWishFlight();return}wishFlightFrame=requestAnimationFrame(draw);let w=canvas.clientWidth||960,h=canvas.clientHeight||540,dpr=Math.min(typeof devicePixelRatio==='number'?devicePixelRatio:1,2.5,2880/Math.max(w,h));if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr)}ctx.setTransform(dpr,0,0,dpr,0,0);drawWishFlightFrame(ctx,w,h,Math.min(WISH_FLIGHT_MS/1000,(now-wishFlightStart)/1000),rarity,count)};
+ draw(wishFlightStart);wishTimer=setTimeout(finishWishFlight,WISH_FLIGHT_MS);
+ if(settings.sfx&&audioContext&&typeof audioContext.createBuffer==='function'){try{let now=audioContext.currentTime,buffer=audioContext.createBuffer(1,audioContext.sampleRate*4,audioContext.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*.15;let node=audioContext.createBufferSource(),filter=audioContext.createBiquadFilter(),gain=audioContext.createGain();node.buffer=buffer;filter.type='bandpass';filter.frequency.setValueAtTime(200,now);filter.frequency.exponentialRampToValueAtTime(3600,now+3.7);gain.gain.setValueAtTime(.002,now);gain.gain.linearRampToValueAtTime(.23,now+2.4);gain.gain.exponentialRampToValueAtTime(.01,now+4.0);node.connect(filter);filter.connect(gain);gain.connect(sfxGain);node.start(now+.9);node.stop(now+4.8);wishFlightAudio.push(node)}catch(e){}}
 }
 
 function wishStarsMarkup(stars){return '<div class="wish-stars" aria-label="'+stars+' 星">'+Array.from({length:stars},(_,i)=>'<span style="--i:'+i+'">★</span>').join('')+'</div>'}
 function wishResultClose(){if(!wishSequence)return;if(wishSequence.batch.length>1)showWishSummary();else finishWish()}
 function bindWishResultActions(){if($('wishResultClose'))$('wishResultClose').onclick=wishResultClose;if($('wishNext'))$('wishNext').onclick=()=>{if(!wishSequence)return;if(++wishSequence.index<wishSequence.batch.length)revealWish();else if(wishSequence.batch.length>1)showWishSummary();else finishWish()};if($('wishAll'))$('wishAll').onclick=showWishSummary}
 function revealWish(){if(!wishSequence)return;$('wishPanel').scrollTop=0;$('wishResults').scrollTop=0;if(wishTimer!==null){clearTimeout(wishTimer);wishTimer=null}stopWishFlight();wishSequence.phase='reveal';$('wishAnimation').classList.add('hidden');let r=wishSequence.batch[wishSequence.index],el=$('wishResults');el.classList.remove('hidden','gold','purple','role-reveal','summary');if(r.stars>=4)el.classList.add(r.stars===5?'gold':'purple');let close='<button id="wishResultClose" class="result-close" aria-label="关闭本次结果">×</button>',next='<div class="'+(r.kind==='role'?'role':'item')+'-reveal-actions"><button id="wishNext">'+(wishSequence.index<wishSequence.batch.length-1?'下一个':'完成')+'</button>'+(wishSequence.batch.length>1?'<button id="wishAll">查看全部</button>':'')+'</div>';
- if(r.kind==='role'){el.classList.add('role-reveal');el.innerHTML=close+'<img class="role-splash" src="'+(SPLASHES[r.id]||PORTRAITS[r.id])+'" alt="'+r.name+'立绘"><div class="role-reveal-info"><span class="element-mark">✧</span><br><small>'+(r.featured?'角色活动祈愿 · UP':'常驻角色')+'</small><h3>'+r.name+'</h3>'+wishStarsMarkup(5)+'<p class="wish-item-note">'+wishNote(r)+'</p></div>'+next;
+ if(r.kind==='role'){el.classList.add('role-reveal');el.innerHTML=close+'<img class="role-splash" src="'+(SPLASHES[r.id]||PORTRAITS[r.id])+'" alt="'+r.name+'立绘"><div class="role-reveal-info"><span class="element-mark">'+(WISH_BANNER_META[r.id]?wishElementMark(WISH_BANNER_META[r.id].element):'✧')+'</span><br><small>'+(r.featured?'角色活动祈愿 · UP':'常驻角色')+'</small><h3>'+r.name+'</h3>'+wishStarsMarkup(5)+'<p class="wish-item-note">'+wishNote(r)+'</p></div>'+next;
  }else el.innerHTML=close+'<div class="item-reveal-art">'+wishArt(r)+'</div><div class="item-reveal-info"><small>'+(r.kind==='item'?'冒险道具':'旅途补给')+'</small><h3>'+r.name+'</h3>'+wishStarsMarkup(r.stars)+'</div><div class="item-reveal-note">'+wishNote(r)+'</div>'+next;
  el.classList.remove('reveal-enter');void el.offsetWidth;el.classList.add('reveal-enter');bindWishResultActions();
 }
 
 
+warmWishArt();
 function showWishSummary(){
  if(!wishSequence)return;$('wishPanel').scrollTop=0;$('wishResults').scrollTop=0;stopWishFlight();wishSequence.phase='summary';
  if(wishTimer!==null){clearTimeout(wishTimer);wishTimer=null}
