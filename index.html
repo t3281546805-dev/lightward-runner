@@ -1335,7 +1335,7 @@ function makeWishCloudSprites(){
   for(let i=0;i<grid.length;i++){let k=Math.imul(i^0x45d9f3b,0x45d9f3b);k=Math.imul(k^(k>>>16),0x45d9f3b);grid[i]=((k^(k>>>16))>>>0)/4294967295}
   const noise=(x,y)=>{let ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy;fx=fx*fx*(3-2*fx);fy=fy*fy*(3-2*fy);let a=grid[(iy&127)*128+(ix&127)],b=grid[(iy&127)*128+((ix+1)&127)],c=grid[((iy+1)&127)*128+(ix&127)],d=grid[((iy+1)&127)*128+((ix+1)&127)];return (a+(b-a)*fx)*(1-fy)+(c+(d-c)*fx)*fy};
   const field=(x,y)=>{let n=0,amp=.52;for(let k=0;k<5;k++){n+=amp*noise(x,y);let xx=x*1.61+y*1.21;x=xx+7.1;y=y*1.61-x*.38+3.8;amp*=.5}return n};
-  for(let y=0;y<size;y++)for(let x=0;x<size;x++){let px=(x-size*.5)/(size*.5),py=(y-size*.5)/(size*.5),r=Math.hypot(px,py),n=field(px*2.8+9,py*2.8+6),shade=field(px*2.8+8.92,py*2.8+5.90),density=wishSmooth((1.04-r+(n-.5)*.37)/.17),lighting=wishClamp(.42+(n-shade)*2.7+n*.50),i=(y*size+x)*4;pixels.data[i]=84+165*lighting;pixels.data[i+1]=141+111*lighting;pixels.data[i+2]=195+60*lighting;pixels.data[i+3]=Math.round(density*255)}
+  for(let y=0;y<size;y++)for(let x=0;x<size;x++){let px=(x-size*.5)/(size*.5),py=(y-size*.5)/(size*.5),r=Math.hypot(px,py),n=field(px*2.8+9,py*2.8+6),shade=field(px*2.8+8.92,py*2.8+5.90),density=wishSmooth((1.04-r+(n-.5)*.37)/.17)*wishSmooth((.99-r)/.14),lighting=wishClamp(.42+(n-shade)*2.7+n*.50),i=(y*size+x)*4;pixels.data[i]=84+165*lighting;pixels.data[i+1]=141+111*lighting;pixels.data[i+2]=195+60*lighting;pixels.data[i+3]=Math.round(density*255)}
   context.putImageData(pixels,0,0);return canvas;
  }catch(error){return null}
 }
