@@ -1305,7 +1305,7 @@ function wishNote(r){return r.kind==='role'?(r.isNew?'新角色 · C0 已解锁'
 
 function beginWish(count){if(wishSequence||![1,10].includes(count))return false;let cost=count*160;if(account.primo<cost){requestWishFunds(count);return false}account.primo-=cost;let batch=Array.from({length:count},()=>rollWish());transaction('wish','旅途群星 · '+count+' 次祈愿',-cost);persistAccount();syncBalances();syncCharacter();renderShop();wishSequence={batch,index:0,phase:'animation'};syncWish();let rarity=Math.max(...batch.map(r=>r.stars));$('wishAnimation').classList.remove('hidden','gold','purple');if(rarity>=4)$('wishAnimation').classList.add(rarity===5?'gold':'purple');$('wishResults').classList.add('hidden');unlockAudio();startWishFlight(rarity,count);if(settings.sfx&&audioContext){let now=audioContext.currentTime;for(let i=0;i<5;i++)audioTone(440*Math.pow(1.25,i),now+i*.16,.6,.11,sfxGain);if(rarity===5)for(let f of [523.25,659.25,783.99,1046.5])audioTone(f,now+3.74,1.1,.16,sfxGain)}if(!wishTimer)wishTimer=setTimeout(finishWishFlight,reducedMotion()?150:WISH_FLIGHT_MS+2500);return true}
 const WISH_FLIGHT_MS=15000;
-const WISH_RECORDINGS={"gold": "./asset-a436ce75d48d.mp4", "purple": "./asset-5d8fd5a5cdc9.mp4"};
+const WISH_RECORDINGS={"gold": "./asset-a436ce75d48d.mp4", "purple": "./asset-5d8fd5a5cdc9.mp4", "blue": "./asset-44041c76a41f.mp4"};
 let wishFlightFrame=0,wishPlaybackToken=0;
 function warmWishArt(){let v=$('wishFilm');if(v&&!v.getAttribute('src')){v.src=WISH_RECORDINGS.purple;v.load()}}
 function stopWishFlight(){wishPlaybackToken++;if(wishFlightFrame)cancelAnimationFrame(wishFlightFrame);wishFlightFrame=0;let v=$('wishFilm');if(v){v.onended=v.onerror=v.onplaying=v.onwaiting=null;v.pause()}$('wishFilmResume')?.classList.add('hidden')}
@@ -1316,7 +1316,7 @@ function wishFilmFocus(t,rarity){
 }
 function startWishFlight(rarity,count){
  stopWishFlight();let token=wishPlaybackToken,v=$('wishFilm'),resume=$('wishFilmResume');if(reducedMotion()){wishTimer=setTimeout(finishWishFlight,150);return}
- v.src=rarity===5?WISH_RECORDINGS.gold:WISH_RECORDINGS.purple;v.muted=true;v.playbackRate=1;v.currentTime=0;v.style.filter=rarity===3?'hue-rotate(-38deg) saturate(.82)':'';v.style.objectPosition='29% 50%';
+ v.style.filter='';v.src=rarity===5?WISH_RECORDINGS.gold:rarity===4?WISH_RECORDINGS.purple:WISH_RECORDINGS.blue;v.muted=true;v.playbackRate=1;v.currentTime=0;v.style.objectPosition='29% 50%';
  v.onended=()=>{if(token===wishPlaybackToken)finishWishFlight()};v.onerror=()=>{if(token===wishPlaybackToken)finishWishFlight()};
  v.onplaying=()=>{if(token!==wishPlaybackToken)return;resume.classList.add('hidden');if(wishTimer!==null)clearTimeout(wishTimer);wishTimer=setTimeout(finishWishFlight,20000)};
  let follow=()=>{if(token!==wishPlaybackToken||wishSequence?.phase!=='animation')return;let x=wishFilmFocus(v.currentTime,rarity);v.style.objectPosition=(x*100).toFixed(2)+'% 50%';wishFlightFrame=requestAnimationFrame(follow)};follow();
