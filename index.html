@@ -513,6 +513,64 @@ body.playing #chaseAtmosphere{opacity:1}
 }
 @media(prefers-reduced-motion:reduce){#wishPanel .summary .wish-card,#wishPanel .summary .wish-card:before,#wishPanel .reveal-enter *{animation:none!important}}
 
+/* Portrait wish presentation: frame the cinematic vertically and reserve separate art/copy/actions bands. */
+@media (orientation:portrait){
+ #wishPanel{height:100dvh;max-height:100dvh}
+ #wishPanel .wish-animation{height:100%;background:#638bd1}
+ #wishPanel #wishCinema{object-fit:cover;object-position:50% 50%;background:#638bd1;max-width:none}
+ #wishPanel #wishCinema.active{animation:portrait-comet-framing 6.133s linear both}
+ #wishPanel .wish-skip{top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));min-height:38px;padding:8px 16px;font-size:12px}
+ #wishPanel .wish-results{width:100%;height:100%;max-height:100%;padding:0;overflow:hidden}
+ #wishPanel .result-close{top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));width:34px;height:34px;z-index:8}
+ #wishPanel .wish-results.role-reveal .role-splash{inset:3% auto auto -80%;width:230%;height:62%;max-width:none;object-fit:contain;object-position:50% 50%}
+ #wishPanel .role-reveal-info{left:8%;right:8%;top:auto;bottom:calc(12% + env(safe-area-inset-bottom));max-width:none;width:auto;transform:none;z-index:3}
+ #wishPanel .role-reveal-info .element-mark{font-size:30px;line-height:1.1}
+ #wishPanel .role-reveal-info small{font-size:10px;letter-spacing:2px}
+ #wishPanel .role-reveal-info h3{font-size:clamp(28px,8.6vw,42px);line-height:1.25;letter-spacing:3px;margin:7px 0 9px}
+ #wishPanel .role-reveal-info .wish-stars{font-size:clamp(18px,5.2vw,23px);letter-spacing:3px;line-height:1.2}
+ #wishPanel .role-reveal-info .wish-item-note{max-width:100%;width:max-content;font-size:10px;line-height:1.5;padding:5px 9px;margin:10px 0 0}
+ #wishPanel .wish-results.role-reveal:before{inset:7% auto auto 4%;width:92vw;height:92vw;max-width:none;max-height:56%;box-shadow:0 0 0 10px #d5b6640d,0 0 55px #e1b05222}
+ #wishPanel .item-reveal-art{inset:12% 8% 40%;width:auto;height:auto;max-width:none}
+ #wishPanel .item-reveal-art svg,#wishPanel .item-reveal-art img{width:80%;height:82%;max-height:100%;max-width:100%;object-fit:contain}
+ #wishPanel .item-reveal-info{left:8%;right:8%;top:64%;max-width:none;text-align:left}
+ #wishPanel .item-reveal-info small{font-size:11px;line-height:1.4}
+ #wishPanel .item-reveal-info h3{font-size:clamp(27px,8vw,38px);line-height:1.25;margin:6px 0 10px;letter-spacing:3px}
+ #wishPanel .item-reveal-info .wish-stars{font-size:clamp(18px,5vw,22px);letter-spacing:3px;line-height:1.2}
+ #wishPanel .item-reveal-note{top:auto;left:8%;right:8%;bottom:calc(14% + env(safe-area-inset-bottom));width:auto;max-width:84%;font-size:10px;line-height:1.5;padding:5px 9px;border-left:1px solid #d1d8ed77;text-align:left}
+ #wishPanel .role-reveal-actions,#wishPanel .item-reveal-actions{left:8%;right:8%;bottom:max(4%,calc(env(safe-area-inset-bottom) + 12px));display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0}
+ #wishPanel .role-reveal-actions button,#wishPanel .item-reveal-actions button{width:100%;min-width:0;min-height:44px;padding:10px 8px;font-size:13px}
+ #wishPanel .role-reveal-actions button:only-child,#wishPanel .item-reveal-actions button:only-child{grid-column:1/-1;width:65%;justify-self:center}
+ #wishPanel .wish-results.summary{padding:max(18px,env(safe-area-inset-top)) 4% max(15px,env(safe-area-inset-bottom));grid-template-rows:auto minmax(0,1fr) auto;row-gap:14px}
+ #wishPanel .summary .wish-grid-title{margin:0;font-size:clamp(21px,6.2vw,29px);line-height:1.3;letter-spacing:4px}
+ #wishPanel .summary .wish-grid{width:100%;height:100%;max-height:100%;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:15px 5px;padding:12px 0;box-sizing:border-box}
+ #wishPanel .summary .wish-card{height:100%;min-height:0;max-height:100%}
+ #wishPanel .summary .wish-card-frame{grid-template-rows:minmax(0,1fr) auto}
+ #wishPanel .summary .wish-card-art{padding-top:25%}
+ #wishPanel .summary .wish-card-copy{padding:4px 1px 21%;gap:4px}
+ #wishPanel .summary .wish-card-copy b{font-size:clamp(7.5px,2.1vw,11px);line-height:1.3;letter-spacing:0}
+ #wishPanel .summary .wish-card-copy small{font-size:clamp(6.5px,1.85vw,9px);line-height:1.3}
+ #wishPanel .summary .wish-card-copy .wish-stars{font-size:clamp(7px,2vw,10px);line-height:1.2;letter-spacing:0}
+ #wishPanel .summary .wish-result-actions{min-height:44px;padding:0;margin:0}
+ #wishPanel .summary .wish-result-actions button{min-height:44px;min-width:130px;font-size:14px}
+ #wishPanel .summary .wish-grid.single{grid-template-columns:minmax(130px,190px);grid-template-rows:minmax(0,1fr);max-height:65dvh;justify-content:center}
+}
+@media (orientation:portrait) and (max-height:680px){
+ #wishPanel .wish-results.role-reveal .role-splash{top:1%;height:59%}
+ #wishPanel .role-reveal-info{bottom:calc(13% + env(safe-area-inset-bottom))}
+ #wishPanel .role-reveal-info .element-mark{font-size:22px}
+ #wishPanel .role-reveal-info h3{font-size:28px;margin:4px 0 6px}
+ #wishPanel .role-reveal-info .wish-item-note{margin-top:6px;font-size:9px}
+ #wishPanel .role-reveal-info .wish-stars{font-size:18px}
+ #wishPanel .item-reveal-info{top:61%}
+ #wishPanel .item-reveal-info h3{font-size:27px;margin:4px 0 7px}
+ #wishPanel .item-reveal-note{bottom:15%;font-size:9px}
+ #wishPanel .wish-results.summary{row-gap:9px;padding-top:12px;padding-bottom:max(10px,env(safe-area-inset-bottom))}
+ #wishPanel .summary .wish-grid{gap:10px 4px;padding:8px 0}
+ #wishPanel .summary .wish-card-copy{gap:2px;padding-bottom:19%}
+}
+@keyframes portrait-comet-framing{0%,26%{object-position:50% 50%}40%{object-position:53% 50%}58%{object-position:49% 50%}76%{object-position:50% 50%}92%,100%{object-position:43% 50%}}
+@media (prefers-reduced-motion:reduce){#wishPanel #wishCinema.active{animation:none}}
+
 </style></head><body class="booting"><img id="homeBackdrop" src="./asset-75c69c1dca2e.png" alt="" aria-hidden="true" decoding="sync"><div id="bootScreen" role="status" aria-live="polite"><h2>提瓦特大逃亡</h2><div class="boot-ring"></div><small id="bootStatus">正在准备角色</small></div><svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l14-8Z" fill="currentColor"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><path d="m9 2-1 3-3 1-2 3 2 3-1 3 2 3 4 1 2 3 4-1 2-3 3-1 1-4-2-3V7l-3-2-3 1-2-3Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol><symbol id="i-fish" viewBox="0 0 24 24"><path d="M3 12c4-9 12-9 16-3l4-3v12l-4-3C15 21 7 21 3 12Z" fill="currentColor"/><circle cx="8" cy="10" r="1.4" fill="#fff9df"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><path d="M7 3H3v4m0-4 7 7m-4 3-3 8h18l-3-8M12 14v3m0 2v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol></defs></svg><canvas id="homeGround" aria-hidden="true"></canvas><canvas id="sceneTransition" class="hidden" aria-hidden="true" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas><div id="chaseAtmosphere" aria-hidden="true"></div><div id="chaseNotice" aria-live="off"></div><canvas id="weatherFx" aria-hidden="true"></canvas><canvas id="view" aria-label="三车道骑行游戏：左右滑动换道，上滑跳跃，下滑俯身滑行"></canvas>
 <div id="home"><button id="legalOpen" class="home-legal">版权声明与免责声明</button><div class="home-brand">✧ 提瓦特大逃亡</div><div class="home-stage" id="homeStage" role="img" aria-label="角色互动展示区：左右拖动旋转角色，上下拖动调整观察高度，双指或滚轮缩放，双击复位，轻点互动" tabindex="0"></div><div class="home-showcase"><small>拖动环视 · 双指缩放</small><div id="homeReaction" aria-live="polite"></div></div><div class="home-bottom"></div><div class="home-left"><div class="home-eyebrow"></div><h1>提瓦特<span>大逃亡</span></h1><button id="homeStart" class="home-button start"><svg aria-hidden="true"><use href="#i-play"/></svg>开始游戏</button><button id="characterOpen" class="home-button character-button"><span aria-hidden="true">♙</span><span id="characterName">鹈鹕骑行</span><span aria-hidden="true">›</span></button><button id="wishOpen" class="home-button wish-open">✦ 角色祈愿 <span aria-hidden="true">›</span></button><button id="shopOpen" class="home-button economy-button">商城 <span aria-hidden="true">›</span></button><p class="model-status" id="homeModelStatus" aria-live="polite"></p></div><div class="home-small"><button id="settingsOpen" class="home-button"><svg aria-hidden="true"><use href="#i-gear"/></svg>设置</button><button id="helpOpen" class="home-button"><span aria-hidden="true">?</span>玩法</button></div><div class="home-best"><img class="currency-icon" src="./asset-60e222508b15.png" alt="原石"><b id="walletPrimo">0</b><img class="currency-icon" src="./asset-e3d8c7656176.webp" alt="创世结晶"><b id="walletGenesis">0</b><b id="bestFish" class="hidden">0</b></div></div>
 <div class="game-ui hud"><div class="stat" aria-label="骑行距离"><svg aria-hidden="true"><use href="#i-route"/></svg><b id="distance">0</b><small>m</small></div><div class="stat" aria-label="收集原石"><img class="currency-icon" src="./asset-60e222508b15.png" alt="原石"><b id="fish">0</b></div><div class="stat"><b id="hearts" aria-label="剩余体力">♥ ♥ ♥</b></div></div><div class="game-ui tools"><button class="round" id="pause" aria-label="暂停游戏">Ⅱ</button></div><div class="game-ui track"><i id="progress"></i></div><div id="climateLabel" class="game-ui climate-label">春天 · 早晨 06:00 · 晴天</div><div class="game-ui speed"><b id="speed">0</b><span>KM/H</span></div><div class="game-ui power-tray" id="powerTray" aria-label="已拾取道具"><button id="use-magnet" class="power-button magnet hidden" aria-label="使用磁铁"></button><button id="use-shield" class="power-button shield hidden" aria-label="使用护盾"></button><button id="use-boost" class="power-button boost hidden" aria-label="使用冲刺"></button><button id="use-heal" class="power-button heal hidden" aria-label="使用体力"></button></div><div id="eventState" class="game-ui event-state hidden" role="status"></div><div id="wallFeedback" style="position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0"></div><div id="toast" role="status"></div>
